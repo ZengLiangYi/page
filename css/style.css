@@ -1,0 +1,242 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+input {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+}
+
+body {
+	font-family: Inter;
+	font-size: 2.4rem;
+	font-weight: 600;
+	color: #ff8b1f;
+}
+
+.container {
+	width: 100vw;
+	height: 100vh;
+	overflow: scroll;
+	padding: 0 1.5rem;
+	box-sizing: border-box;
+	user-select: none;
+	position: relative;
+	transition: all 0.35s;
+	scroll-snap-type: y proximity;
+
+	background: radial-gradient(
+		50% 50% at 50% 50%,
+		rgba(255, 204, 245, 0.66) 21%,
+		rgba(212, 255, 249, 0.83) 67.5%,
+		rgba(215, 255, 223, 0.9) 100%
+	);
+}
+
+/* header {
+	width: 100vw;
+	height: 5rem;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	align-items: center;
+} */
+
+header {
+	height: 5rem;
+
+	position: relative;
+
+	display: flex;
+	align-items: center;
+
+	scroll-snap-align: start;
+}
+
+header > span:nth-child(1) {
+	position: absolute;
+	left: 30px;
+}
+
+header > span:nth-child(2) {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+header > span:nth-child(3) {
+	position: absolute;
+	right: 30px;
+}
+
+header > span:nth-child(3) > label {
+	cursor: pointer;
+}
+
+.blank {
+	height: 92vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#cb:checked ~ .blank > .text {
+	max-height: 100vh;
+	padding: 0.5rem 15rem;
+}
+
+.blank > .text {
+	margin-top: -6rem;
+	max-height: 0;
+	overflow: hidden;
+	transition: all 0.35s;
+	font-weight: 500;
+	font-size: 1.8rem;
+	padding: 0 18rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 2rem;
+}
+
+main {
+	border-top: 5px solid #ff8b1f;
+	position: relative;
+}
+
+main::before {
+	color: #ff8b1f;
+	content: '';
+	background: url(../assets/arrow.png) no-repeat center;
+	background-size: 100% 100%;
+	display: inline-block;
+	width: 3rem;
+	height: 3rem;
+	position: absolute;
+	top: -5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	animation: shaking 1s infinite;
+}
+
+@keyframes shaking {
+	0% {
+		transform: translateY(-10px);
+	}
+	50% {
+		transform: translateY(10px);
+	}
+	100% {
+		transform: translateY(-10px);
+	}
+}
+
+section {
+	position: relative;
+	border-bottom: 2px solid #ff8b1f;
+	overflow: hidden;
+	scroll-snap-align: start;
+}
+
+section > input:checked ~ .tab-content {
+	max-height: 200vh;
+	padding: 0.5em 0 5rem;
+}
+
+section > label {
+	width: 100%;
+	height: 8rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+section > .tab-content {
+	max-height: 0;
+	transition: all 0.35s;
+	font-weight: 500;
+	display: grid;
+	gap: 2.4rem;
+	grid-template-columns: 3fr 2fr;
+}
+
+section > .tab-content > .text {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+section > .tab-content > .image {
+	position: relative;
+	height: 100%;
+}
+
+section > .tab-content > .image > img {
+	position: absolute;
+	right: 0;
+	height: 100%;
+	max-width: 600px;
+	object-fit: contain;
+	transition: opacity 0.3s ease;
+	display: none;
+}
+
+section > .tab-content > .image img.active {
+	display: block;
+	animation: fadein 0.3s;
+}
+
+@keyframes fadeout {
+	0% {
+		opacity: 1;
+		display: block;
+	}
+	100% {
+		opacity: 0;
+		display: block;
+	}
+}
+
+@keyframes fadein {
+	0% {
+		transform: scale(0.9);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+footer {
+	margin-top: 8rem;
+	width: 100%;
+	height: 10rem;
+	position: relative;
+
+	display: flex;
+	align-items: center;
+}
+
+footer > span {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+@media (width < 1600px) {
+	section > .tab-content {
+		grid-template-rows: 3fr 2fr;
+		grid-template-columns: none;
+	}
+}
